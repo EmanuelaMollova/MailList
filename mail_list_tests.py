@@ -6,7 +6,7 @@ class MailListTest(unittest.TestCase):
         self.m1 = mail_list.MailList()
 
         self.m = mail_list.MailList()
-        self.m.register = { 1: "HackFMI"}
+        self.m.register = { 1: "HackFMI", 2: "FMI"}
         self.m.mail_list = { "HackFMI" : []}
 
     def test_create(self):
@@ -23,6 +23,10 @@ class MailListTest(unittest.TestCase):
     def test_show_list(self):
         self.m.add_name_email("Ivaylo", "ivo@hackfmi.com", 1)
         self.assertEqual("Ivaylo - ivo@hackfmi.com\n", self.m.show_list(1))
+
+    def test_show_lists(self):
+        self.assertEqual("[1] HackFMI/n[2] FMI", self.m.show_lists_second())
+
 
 if __name__ == '__main__':
     unittest.main()
