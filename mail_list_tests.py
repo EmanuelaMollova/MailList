@@ -1,12 +1,11 @@
 import unittest
-import mail
+import mail_list
 
-class MailTest(unittest.TestCase):
-
+class MailListTest(unittest.TestCase):
     def setUp(self):
-        self.m1 = mail.Mail()
+        self.m1 = mail_list.MailList()
 
-        self.m = mail.Mail()
+        self.m = mail_list.MailList()
         self.m.register = { 1: "HackFMI"}
         self.m.mail_list = { "HackFMI" : []}
 
@@ -17,7 +16,6 @@ class MailTest(unittest.TestCase):
         self.assertEqual("A mail list with this name already exists!", self.m1.create("HackBG"))
         print(self.m1.register)
         print(self.m1.mail_list)
-
 
     def test_add_name_email(self):
         self.assertEqual("Ivaylo <ivo@hackfmi.com> was added to HackFMI", self.m.add_name_email("Ivaylo", "ivo@hackfmi.com", 1))
