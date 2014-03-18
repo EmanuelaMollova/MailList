@@ -1,7 +1,7 @@
 class MailList():
     def __init__(self):
         self.mail_list = {}
-        self.register = {}
+        self.register  = {}
 
     def create(self, list_name):
         if list_name in self.mail_list:
@@ -28,3 +28,11 @@ class MailList():
         newlist = [name, email]
         self.mail_list[self.register[unique_list_identifier]].append(newlist)
         return "{} <{}> was added to {}".format(name, email, self.register[unique_list_identifier])
+
+    def show_list(self, unique_list_identifier):
+        key = self.register[unique_list_identifier]
+        contacts = ''
+        for contact in self.mail_list[key]:
+            contacts += contact[0] + " - " + contact[1] + "\n"
+
+        return contacts
