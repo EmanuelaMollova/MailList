@@ -1,6 +1,7 @@
 class Mail():
-    def __init(mail_list):
-        mail_list = {}
+    def __init(self, mail_list,register):
+        self.mail_list = {}
+        self.register = {}
 
     def choose_action(self, command):
         if command == 'help':
@@ -21,8 +22,29 @@ class Mail():
 
         print("\n".join(messages))
 
+    def add(self,unique_list_identifier):
+            input_array = input(">name")
+            name = input_array[0]
+            input_array = input(">email")
+            email = input_array[1]
+            print(add_name_email(name, email, unique_list_identifier))
+            
+            
+
+    def add_name_email(self, name, email, unique_list_identifier):
+        newlist = [name, email]
+        self.mail_list[self.register[unique_list_identifier]].append(newlist)
+        return "{} <{}> was added to {}".format(name, email, self.register[unique_list_identifier])
+
+
+
+
+
+            
+
     def say_hello(self):
         print("Hello Stranger! This is a cutting-edge, console-based mail-list!\n Type help, to see a list of commands.")
+
 
 def main():
     mail = Mail()
