@@ -28,3 +28,12 @@ class MailList():
         newlist = [name, email]
         self.mail_list[self.register[unique_list_identifier]].append(newlist)
         return "{} <{}> was added to {}".format(name, email, self.register[unique_list_identifier])
+
+    def show_lists(self):
+        print(self.show_lists_second())
+
+    def show_lists_second(self):
+            formatted_strings = []
+            for key in self.register:
+                formatted_strings.append("[{}] {}".format(key, self.register[key]))
+            return "/n".join(formatted_strings)
