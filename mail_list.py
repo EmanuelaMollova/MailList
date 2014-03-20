@@ -1,6 +1,7 @@
 #TODO Class for contacts, not array
 #TODO No strings here, everything with IO should go in mail.py
 #TODO Private methods and attributes
+#TODO Branches !!!
 
 class MailList():
     def __init__(self):
@@ -117,5 +118,26 @@ class MailList():
                 return "You crazy bastard. Stop playing with fire!"
         else:
             return "List with unique identifier <{}> was not found.".format(unique_list_identifier)
+
+    def update_name_email(self, name, email, unique_list_identifier, unique_name_identifier):
+        if name or email:
+            list_name  = self.find_list_index(unique_list_identifier)
+            subscriber = self.mail_list[list_name][unique_name_identifier - 1]
+        if name:
+            subscriber[0] = name
+        if email:
+            subscriber[1] = email
+
+    def update_subscriber(self, unique_list_identifier, unique_name_identifier):
+        list_name = self.find_list_index(unique_list_identifier)
+        if not list_name:
+            return False
+
+        if len(self.mail_list[list_name]) < unique_name_identifier - 1:
+            return False
+
+        self.update_name_email(self, name, email, unique_list_identifier, unique_name_identifier)
+
+
 
 
