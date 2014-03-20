@@ -58,6 +58,12 @@ class MailListTest(unittest.TestCase):
         self.assertEqual(2, len(mail.mail_list["Merged1"]))
         self.assertEqual(1, len(mail.mail_list["Merged2"]))
 
+    def test_delete(self):
+        self.assertEqual("<FMI> was deleted.", self.m.delete(2))
+
+    def test_delete_not_there(self):
+        self.assertEqual("List with unique identifier <2> was not found.", self.m.delete(2))
+
 
 if __name__ == '__main__':
     unittest.main()

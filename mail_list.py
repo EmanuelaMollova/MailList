@@ -21,7 +21,7 @@ class MailList():
         self.mail_list[list_name] = []
         return "New list <{}> was created".format(list_name)
 
-    def add(self,unique_list_identifier):
+    def add(self, unique_list_identifier):
         input_array = input(">name")
         name = input_array[0]
         input_array = input(">email")
@@ -96,4 +96,26 @@ class MailList():
 
     def merge_lists(self, list_identifier_1, list_identifier_2, new_list_name):
         print(self.merge_lists_helper(list_identifier_1, list_identifier_2, new_list_name))
+
+    def delete(self, unique_list_identifier):
+        is_there = False
+
+        for key in self.register:
+            if unique_list_identifier == key:
+                is_there = True
+
+        if is_there:
+            yes_or_no = input("Are you sure you want to delete <HackBulgaria - Java>?\n(Y/N)>")
+            if yes_or_no == 'Y':
+                del self.mail_list[self.register[key]]
+                name = self.register[key]
+                del self.register[key]
+                print(self.register)
+                print(self.mail_list)
+                return "<{}> was deleted.".format(name)
+            else:
+                return "You crazy bastard. Stop playing with fire!"
+        else:
+            return "List with unique identifier <{}> was not found.".format(unique_list_identifier)
+
 
