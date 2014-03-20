@@ -1,3 +1,7 @@
+#TODO Class for contacts, not array
+#TODO No strings here, everything with IO should go in mail.py
+#TODO Private methods and attributes
+
 class MailList():
     def __init__(self):
         self.mail_list = {}
@@ -62,19 +66,19 @@ class MailList():
                 is_anywhere = True
         if not is_anywhere:
             return "<{}> was not found in the current mailing lists.".format(searched_email)
-        else: 
+        else:
             return "/n".join(where_is_email)
 
-    def __find_list_index(list_name):
+    def find_list_index(self, list_name):
         for key in self.register:
             if self.register[key] == list_name:
                 return key
 
         return False
 
-    def __merge_lists(list_identifier_1, list_identifier_2, new_list_name):
+    def merge_lists_helper(self, list_identifier_1, list_identifier_2, new_list_name):
         self.create(new_list_name)
-        new_identifier = self.__find_list_index(new_list_name)
+        new_identifier = self.find_list_index(new_list_name)
 
         list_name_1 = self.register[list_identifier_1]
         list_name_2 = self.register[list_identifier_2]
@@ -83,13 +87,13 @@ class MailList():
             self.add_name_email(contact[0], contact[1], new_identifier)
 
         for contact in self.mail_list[list_name_2]:
-            if is_email_in_mail_list(contact[1], list_identifier_1):
+            if self.is_email_in_mail_list(contact[1], list_identifier_1):
                 continue
             else:
                 self.add_name_email(contact[0], contact[1], new_identifier)
 
         return "Merged lists <{}> and <{}> into <{}>".format(list_name_1, list_name_2, new_list_name)
 
-    def merge_lists(list_identifier_1, list_identifier_2, new_list_name):
-        print(self.__merge_lists(list_identifier_1, list_identifier_2, new_list_name))
+    def merge_lists(self, list_identifier_1, list_identifier_2, new_list_name):
+        print(self.merge_lists_helper(list_identifier_1, list_identifier_2, new_list_name))
 
