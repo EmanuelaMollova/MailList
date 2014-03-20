@@ -58,6 +58,17 @@ class MailListTest(unittest.TestCase):
         self.assertEqual(2, len(mail.mail_list["Merged1"]))
         self.assertEqual(1, len(mail.mail_list["Merged2"]))
 
+    def test_update_subscriber(self):
+        self.m1.create("HB")
+        index = self.m1.find_list_index("HB")
+
+        self.assertTrue(not self.m1.update_subscriber(index, 1))
+
+        self.m1.add_name_email("Emi", "emi@emi.com", index)
+        self.m1.update_name_email("", "emanuela@emi.com", index, 1)
+
+        self.assertEqual("emanuela@emi.com", self.m1["HB"][1][1])
+        self.assertEqual("Emi", self.m1["HB"][1][0])
 
 if __name__ == '__main__':
     unittest.main()
