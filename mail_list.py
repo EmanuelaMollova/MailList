@@ -41,7 +41,28 @@ class MailList():
         print(self.show_lists_second())
 
     def show_lists_second(self):
-            formatted_strings = []
-            for key in self.register:
-                formatted_strings.append("[{}] {}".format(key, self.register[key]))
-            return "/n".join(formatted_strings)
+        formatted_strings = []
+        for key in self.register:
+            formatted_strings.append("[{}] {}".format(key, self.register[key]))
+        return "/n".join(formatted_strings)
+
+    def is_email_in_mail_list(self, email, unique_list_identifier):
+        for name_email in self.mail_list[self.register[unique_list_identifier]]:
+            if name_email[1] == email:
+                return True
+        return False
+
+    def search_email(self, searched_email):
+        where_is_email = []
+        where_is_email.append("<{}> was found in:".format(searched_email))
+        is_anywhere = False
+        for key in self.register:
+            if self.is_email_in_mail_list(searched_email, key):
+                where_is_email.append("[{}] {}".format(key, self.register[key]))
+                is_anywhere = True
+        if not is_anywhere:
+            return "<{}> was not found in the current mailing lists.".format(searched_email)
+        else: 
+            return "/n".join(where_is_email)
+
+
