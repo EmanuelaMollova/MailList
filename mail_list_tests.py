@@ -39,7 +39,26 @@ class MailListTest(unittest.TestCase):
     def test_is_not_email_in_mail_list(self):
         self.assertTrue(not self.m.is_email_in_mail_list("emoemo@fmi.com", 1))
 
+    def test_merge_list(self):
+        mail = mail_list.MailList()
+        mail.create("HB1")
+        index1 = mail.__find_list_index("HB1")
+        mail.add_name_email("Emi", "emi@emi.com")
 
+        mail.crate("HB2")
+        index2 = mail.__find_list_index("HB2")
+        mail.add_name_email("Rado", "rado@rado.com")
+
+        mail.crate("HB3")
+        index3 = mail.__find_list_index("HB3")
+        mail.add_name_email("RadoRado", "rado@rado.com")
+
+        mail.__merge_lists(index1, index3, "Merged2")
+
+        self.assertEqual("Merged lists <HB1> and <HB2> into <Merged1>", mail.__merge_lists(index1, index2, "Merged1"))
+
+        self.assertEqual(2, len(mail.mail_list["Merged1"]))
+        self.assertEqual(1, len(mail.mail_list["Merged2"]))
 
 
 if __name__ == '__main__':

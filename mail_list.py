@@ -18,11 +18,11 @@ class MailList():
         return "New list <{}> was created".format(list_name)
 
     def add(self,unique_list_identifier):
-            input_array = input(">name")
-            name = input_array[0]
-            input_array = input(">email")
-            email = input_array[1]
-            print(add_name_email(name, email, unique_list_identifier))
+        input_array = input(">name")
+        name = input_array[0]
+        input_array = input(">email")
+        email = input_array[1]
+        print(add_name_email(name, email, unique_list_identifier))
 
     def add_name_email(self, name, email, unique_list_identifier):
         newlist = [name, email]
@@ -30,9 +30,9 @@ class MailList():
         return "{} <{}> was added to {}".format(name, email, self.register[unique_list_identifier])
 
     def show_list(self, unique_list_identifier):
-        key = self.register[unique_list_identifier]
+        list_name = self.register[unique_list_identifier]
         contacts = ''
-        for contact in self.mail_list[key]:
+        for contact in self.mail_list[list_name]:
             contacts += contact[0] + " - " + contact[1] + "\n"
 
         return contacts
@@ -65,4 +65,31 @@ class MailList():
         else: 
             return "/n".join(where_is_email)
 
+    def __find_list_index(list_name):
+        for key in self.register:
+            if self.register[key] == list_name:
+                return key
+
+        return False
+
+    def __merge_lists(list_identifier_1, list_identifier_2, new_list_name):
+        self.create(new_list_name)
+        new_identifier = self.__find_list_index(new_list_name)
+
+        list_name_1 = self.register[list_identifier_1]
+        list_name_2 = self.register[list_identifier_2]
+
+        for contact in self.mail_list[list_name_1]:
+            self.add_name_email(contact[0], contact[1], new_identifier)
+
+        for contact in self.mail_list[list_name_2]:
+            if is_email_in_mail_list(contact[1], list_identifier_1):
+                continue
+            else:
+                self.add_name_email(contact[0], contact[1], new_identifier)
+
+        return "Merged lists <{}> and <{}> into <{}>".format(list_name_1, list_name_2, new_list_name)
+
+    def merge_lists(list_identifier_1, list_identifier_2, new_list_name):
+        print(self.__merge_lists(list_identifier_1, list_identifier_2, new_list_name))
 
