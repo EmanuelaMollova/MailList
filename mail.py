@@ -1,4 +1,4 @@
-import mail_list
+# import mail_list
 
 def say_hello():
     return "Hello Stranger! This is a cutting-edge, console-based mail-list!\nType help, to see a list of commands."
